@@ -1,29 +1,53 @@
-// from data.js
-const tableData = data;
+// Starter Code
+var tableData = data;
 
-// YOUR CODE HERE!
-// establishing references to tbody, input fields, filter button, and data.js columns
+// establishing references to index
 var tbody = d3.select("tbody");
-var date_input = d3.select("#datetime")
-var city_input = d3.select("#city")
-var filter_btn = d3.select("#filter-btn")
-var columns = ["datetime", "city","state","country","shape","durationMinutes","comments"]
+var columns = ["datetime", "city", "state", "country", "shape", "durationMinutes", "comments"]
 
-
-
-function createTable()  {
-    let table = document.createElement("table");
-
-    table.insertAdjacentHTML('beforeend', '<tr class='firstRow', "<tr class='firstRow'><th>Title</th><th>Author</th><th>Read?</th></tr>'); 
-
-    for (var sightings = 0; sightings < tableData.length; sightings++)  //loops through the array 
-   
-    {
-        //add info from the array into this
-        table.insertAdjacentHTML("beforeend","<tr><td>" + tableData[i].datetime + "</td><td>");
-    }
-
-    document.body.append(table);
+// loop to move data.js table into index.html
+var Table_construct = (dataInput) => {
+    dataInput.forEach(UFOreport => {
+        var row = tbody.append("tr");
+        columns.forEach(column => row.append("td").text(UFOreport[column]))
+    });
 }
 
-function createTable()
+Table_construct(tableData);
+
+//event listener for date filter button functionality 
+var UFO_filter = d3.select("#filter-btn");
+var UFO_date = d3.select("#datetime");
+UFO_filter.on("click", () => {
+    var date_input = UFO_date.property("value").trim();
+    var filter_selection = tableData.filter(tableData => tableData.datetime === date_input);
+
+    tbody.html("");
+
+    let response = {
+        filter_selection
+    }
+
+    if(response.filter_selection.length !==0){
+        Table_construct(filter_selection);
+    }     
+})
+
+//// code to execute a search when enter key is pressed in the search field
+// var UFO_input = index.getElementById('input-id');
+// UFO_input.addEventListener("keyup", function onEvent(event) {
+//     if (event.keyCode === 13) {
+//         var date_input = UFO_date.property("value").trim();
+//         var filter_selection = tableData.filter(tableData => tableData.datetime === date_input);
+    
+//         tbody.html("");
+    
+//         let response = {
+//             filter_selection
+//         }
+    
+//         if(response.filter_selection.length !==0){
+//             Table_construct(filter_selection);
+//         }
+//     }
+// })

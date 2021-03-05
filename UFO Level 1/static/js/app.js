@@ -1,8 +1,15 @@
 // from data.js
 const tableData = data;
-const tbody = d3.select("tbody");
 
 // YOUR CODE HERE!
+// establishing references to tbody, input fields, filter button, and data.js columns
+var tbody = d3.select("tbody");
+var date_input = d3.select("#datetime")
+var city_input = d3.select("#city")
+var filter_btn = d3.select("#filter-btn")
+var columns = ["datetime", "city","state","country","shape","durationMinutes","comments"]
+
+
 
 function createTable()  {
     let table = document.createElement("table");

@@ -23,6 +23,7 @@ var UFO_state = d3.select("#state");
 var UFO_country = d3.select("#country");
 var UFO_shape = d3.select("#shape");
 UFO_filter.on("click", () => {
+    d3.event.preventDefault();
     var date_input = UFO_date.property("value").trim();
     var city_input = UFO_city.property("value").toLowerCase().trim();
     var state_input = UFO_state.property("value").toLowerCase().trim();
@@ -33,7 +34,7 @@ UFO_filter.on("click", () => {
     var filter_state = tableData.filter(tableData => tableData.state === state_input);
     var filter_country = tableData.filter(tableData => tableData.country === country_input);
     var filter_shape = tableData.filter(tableData => tableData.shape === shape_input);
-    var Filter_All = tableData.filter(tableData => tableData.datetime === inputDate && tableData.city === city_input
+    var Filter_All = tableData.filter(tableData => tableData.datetime === date_input && tableData.city === city_input
                                         && tableData.state == state_input && tableData.country == country_input 
                                         && tableData.shape == shape_input);
     tbody.html("");
@@ -45,10 +46,18 @@ UFO_filter.on("click", () => {
     if(response.Filter_All.length !==0){
         Table_construct(Filter_All);
     }
-        else if(response.Filter_All.length === 0 && ((response.filter_date.length !== 0 || response.filter_city.length !== 0))) {
-            addData(filter_date) || addData(filter_city);
+        else if(response.Filter_All.length === 0 
+            && ((response.filter_date.length !== 0 
+                || response.filter_city.length !== 0
+                || response.filter_state.length !== 0 
+                || response.filter_country.length !== 0 
+                || response.filter_shape.length !== 0))) {
+                Table_construct(filter_date) || 
+                Table_construct(filter_city) || 
+                Table_construct(filter_state) || 
+                Table_construct(filter_country) || 
+                Table_construct(filter_shape);
         }
-
     
     })     
 // })

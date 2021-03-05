@@ -8,5 +8,8 @@ List of Commits:
 6. initial UFO part 2
 7. UFO part 2 with semi-working filter (for-loop/if-else method not workable for more than two filter values)
 8. new part 2 filtering solution using Object.entries call
-9.10. cleaning repo
-11.12. updating readme
+9. cleaning repo
+10.cleaning repo
+11.updating readme
+12.updating readme
+13.updating readme
